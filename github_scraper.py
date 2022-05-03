@@ -17,10 +17,6 @@ scraper.host()
 scraper.links()
 scraper.nutrients()  # if available
 
-
-for ingredient in allIngredients:
-    print(ingredient)
-
 # voor alle 'oz.', 'cup', 'inch (”)' en 'lb.'
 # vertaal het getal links hiervan naar de bijbehorende metric eenheid
 # oz. = ml of gram
@@ -33,7 +29,17 @@ unitMapping = {
     "oz.": "gram",
     "cup": "ml",
     "lb.": "gram",
-    "”": "cm"
+    "”": " cm"
 }
 
-print(unitMapping.get("cup"))
+for ingredient in allIngredients:
+    ingredientM = ingredient
+    
+    for unit in unitMapping.keys():
+        if unit in ingredient:
+            ingredientM = ingredientM.replace(unit, unitMapping.get(unit))
+    print(ingredientM) 
+
+
+            
+    
