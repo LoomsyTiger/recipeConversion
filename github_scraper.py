@@ -32,6 +32,7 @@ unitMapping = {
     "”": " cm"
 }
 
+# vervang alle units uit de mapping
 for ingredient in allIngredients:
     ingredientM = ingredient
     
@@ -40,6 +41,14 @@ for ingredient in allIngredients:
             ingredientM = ingredientM.replace(unit, unitMapping.get(unit))
     print(ingredientM) 
 
+# volgende functions nodig:
+    # gebruik unit als delimiter
+    # pak de laatste karakters uit de linker snippet
+    # vorm om naar integer
+    # reken de waarden om naar metric
 
+conversionMapping = {
+    "oz.": 28.34952
+}
             
     
