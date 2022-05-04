@@ -46,6 +46,9 @@ for ingredient in allIngredients:
     # pak de laatste karakters uit de linker snippet
     # vorm om naar integer
     # reken de waarden om naar metric
+    
+def getAmount():
+    unit.split(unitMapping.keys())
 
 conversionMapping = {
     "oz.": 28.34952
