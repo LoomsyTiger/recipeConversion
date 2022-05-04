@@ -1,4 +1,6 @@
+from operator import index
 from recipe_scrapers import scrape_me
+from itertools import cycle
 
 # give the url as a string, it can be url from any site listed below
 scraper = scrape_me('https://www.bonappetit.com/recipe/spicy-braised-eggplant-noodles')
@@ -44,7 +46,7 @@ for ingredient in allIngredients:
     for unit in unitMapping.keys():
         if unit in ingredient:
             ingredientM = ingredientM.replace(unit, unitMapping.get(unit))
-    print(ingredientM) 
+    # print(ingredientM) 
     
 # volgende functions nodig:
     # gebruik unit als delimiter
@@ -59,11 +61,25 @@ conversionMapping = {
 # split zin op spatie
 # loop tot integer
 # pak integer en index+1
-def algoritmeJustin():
-    for allWords in allIngredients:
-        word = allWords.split(" ")
-    
 
+allWords = []
+allWordsCycle = cycle(allWords)
+conversionOldNew = {
+    
+}
+
+
+for sentence in allIngredients:
+    allWords = sentence.split(" ")
+    print(sentence.split(" "))
+    
+    for word in allWords:
+        if word.isdigit():
+            enumerate(word)
+            conversionOldNew.update({word:next(allWordsCycle)})
+               
+print(conversionOldNew)
+    
 
 
     
