@@ -22,7 +22,7 @@ scraper.nutrients()  # if available
 # voor alle 'oz.', 'cup', 'inch (”)' en 'lb.'
 # vertaal het getal links hiervan naar de bijbehorende metric eenheid
     # oz. = ml of gram
-    # cup = ml of gram
+    # cup = ml of gram>>
     # lb. = gram
     # ” = cm
 
