@@ -62,12 +62,9 @@ conversionMapping = {
 # loop tot integer
 # pak integer en index+1
 
-allWords = []
-allWordsCycle = cycle(allWords)
 conversionOldNew = {
     
 }
-
 
 for sentence in allIngredients:
     allWords = sentence.split(" ")
@@ -76,12 +73,6 @@ for sentence in allIngredients:
     for word in allWords:
         if word.isdigit():
             enumerate(word)
-            conversionOldNew.update({word:next(allWordsCycle)})
+            conversionOldNew.update({word:""})
                
 print(conversionOldNew)
-    
-
-
-    
-    
-# tests
