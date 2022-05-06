@@ -1,3 +1,5 @@
+from enum import EnumMeta
+import enum
 from operator import index
 from recipe_scrapers import scrape_me
 from itertools import cycle
@@ -74,5 +76,27 @@ for sentence in allIngredients:
         if word.isdigit():
             enumerate(word)
             conversionOldNew.update({word:""})
-               
-print(conversionOldNew)
+        if word == "¼":
+            conversionOldNew.update({0.25:""})
+        if word == "½":
+            conversionOldNew.update({0.5:""})
+        if word == "¾":
+            conversionOldNew.update({0.75:""})
+
+
+def getList(dict):
+    return list(dict.keys())
+
+oldNewList = getList(conversionOldNew)
+
+for index, elem in enumerate(oldNewList):
+    if (index+1 < len(oldNewList) and index -1 >= 0):
+
+        prevWord = str(oldNewList[index-1])
+        currWord = str(elem)
+        nextWord = str(oldNewList[index+1])
+
+        print(prevWord, currWord, nextWord)
+
+
+print()
