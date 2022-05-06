@@ -89,17 +89,6 @@ def getList(dict):
 
 oldNewList = getList(conversionOldNew)
 
-# for sentence in allIngredients:
-#     allWords = sentence.split(" ")
-
-#     for index, elem in enumerate(allWords):
-#         if (index+1 < len(allWords) and index -1 >= 0):
-
-#             prevWord = allWords[index-1]
-#             currWord = str(elem)
-            
-#             print(prevWord, currWord)
-
 for word in allWords:
     for key in oldNewList:
         if key == word:
@@ -108,7 +97,7 @@ for word in allWords:
                 currWord = str(key)
                 nextWord = allWords[index+1]
                 
-                print(f"'{currWord}'", nextWord)
+                print(currWord, nextWord)
 
 
 
