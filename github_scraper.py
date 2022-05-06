@@ -75,13 +75,13 @@ for sentence in allIngredients:
     for word in allWords:
         if word.isdigit():
             enumerate(word)
-            conversionOldNew.update({word:""})
-        if word == "¼":
-            conversionOldNew.update({0.25:""})
-        if word == "½":
-            conversionOldNew.update({0.5:""})
-        if word == "¾":
-            conversionOldNew.update({0.75:""})
+            conversionOldNew.update({int(word):0})
+        elif word == "¼":
+            conversionOldNew.update({0.25:0})
+        elif word == "½":
+            conversionOldNew.update({0.5:0})
+        elif word == "¾":
+            conversionOldNew.update({0.75:0})
 
 
 def getList(dict):
@@ -89,14 +89,27 @@ def getList(dict):
 
 oldNewList = getList(conversionOldNew)
 
-for index, elem in enumerate(oldNewList):
-    if (index+1 < len(oldNewList) and index -1 >= 0):
+# for sentence in allIngredients:
+#     allWords = sentence.split(" ")
 
-        prevWord = str(oldNewList[index-1])
-        currWord = str(elem)
-        nextWord = str(oldNewList[index+1])
+#     for index, elem in enumerate(allWords):
+#         if (index+1 < len(allWords) and index -1 >= 0):
 
-        print(prevWord, currWord, nextWord)
+#             prevWord = allWords[index-1]
+#             currWord = str(elem)
+            
+#             print(prevWord, currWord)
+
+for word in allWords:
+    for key in oldNewList:
+        if key == word:
+            if (index+1 < len(allWords) and index -1 >= 0):
+
+                currWord = str(key)
+                nextWord = allWords[index+1]
+                
+                print(f"'{currWord}'", nextWord)
 
 
-print()
+
+print(conversionOldNew)
