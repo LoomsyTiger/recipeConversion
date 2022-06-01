@@ -1,4 +1,5 @@
-def unid_formatter(unid):
+def unid_formatter(unid_url):
+    unid = unid_url.partition("unid=")[2]
     eight = unid[0:8]
     four1 = unid[8:12]
     four2 = unid[12:16]
@@ -8,4 +9,5 @@ def unid_formatter(unid):
     formatted = (eight+delimiter+four1+delimiter+four2+delimiter+four3+delimiter+twelve)
     return formatted
 
-print(unid_formatter("12345678123412341234123456789123"))
+print(unid_formatter("https://boskalis.support.topdesk.net/tas/secure/person?unid=4c1e84b4d658582cafaecdf8aa2f1af5"))
+
