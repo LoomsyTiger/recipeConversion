@@ -36,45 +36,50 @@ dict_conversion_rates = {
     "”": 2.54 # inch naar cm
 }
 
-imperial_ingredient_list = {} # dictionary met de integer-waarden van ieder ingrediënt als KEY + de string van de eenheid als VALUE
-oldNewList = [] # 
+dict_imperial_ingredients = {} # dictionary met de integer-waarden van ieder ingrediënt als KEY + de string van de eenheid als VALUE
+list_imperial_ingredients = [] # list voor alle KEYS uit de dict
+list_all_ingredients = []
 
 # split zin op spatie
-i = 0
+
 for sentence in all_ingredients:
-    allWords = sentence.split(" ")
+    list_all_ingredients.append(sentence.split(" "))
+print(list_all_ingredients)
 
 # zet alle digits en fractions in conversionOldNew dict
-for word in allWords:
-    if word.isdigit():
-        int_word = int(word)
-        imperial_ingredient_list.update({int_word:0})
-        # hoe zorg ik er voor dat deze vervolgens netjes de index +1 pakt?
-        imperial_ingredient_list.update({int(word):0})
-    elif word == "¼":
-        imperial_ingredient_list.update({0.25:0})
-    elif word == "½":
-        imperial_ingredient_list.update({0.5:0})
-    elif word == "¾":
-        imperial_ingredient_list.update({0.75:0})
+for ingredient in list_all_ingredients:
+    for word in ingredient:
+        if word.isdigit():
+            int_word = int(word)
+            dict_imperial_ingredients.update({int_word:0})
+            # hoe zorg ik er voor dat deze vervolgens netjes de index +1 pakt?
+            dict_imperial_ingredients.update({int(word):0})
+        elif word == "¼":
+            dict_imperial_ingredients.update({0.25:0})
+        elif word == "½":
+            dict_imperial_ingredients.update({0.5:0})
+        elif word == "¾":
+            dict_imperial_ingredients.update({0.75:0})
 
 # return een lijst van alle keys uit een dict
 def getList(dict):
     return list(dict.keys())
 
-oldNewList = getList(imperial_ingredient_list)
+list_imperial_ingredients = getList(dict_imperial_ingredients)
+print(list_imperial_ingredients)
 
 # haal van alle keys in de dict het volgende woord op en werk de dict bij
-for word in allWords:
-    for key in oldNewList:
+i = 0
+for word in list_all_ingredients:
+    for key in list_imperial_ingredients:
         if key == word:
-            if (i+1 < len(allWords) and i -1 >= 0):
+            if (i+1 < len(list_all_ingredients) and i -1 >= 0):
                 currWord = str(key)
-                nextWord = allWords[i+1]
-                imperial_ingredient_list[currWord] = nextWord
+                nextWord = list_all_ingredients[i+1]
+                dict_imperial_ingredients[currWord] = nextWord
     i+=1
                 
-print(imperial_ingredient_list)
+print(dict_imperial_ingredients)
 
 
 # vervangt de amerikaanse unitnamen in all_ingredients met value uit de mapping
@@ -84,9 +89,9 @@ def imperial_metric(all_ingredients):
     for ingredient in all_ingredients:
         ingredientM = ingredient
         
-        for unit in unitMapping.keys():
+        for unit in dict_unit_mapping.keys():
             if unit in ingredient:
-                ingredientM = ingredientM.replace(unit, unitMapping.get(unit))
+                ingredientM = ingredientM.replace(unit, dict_unit_mapping.get(unit))
                 metric_ingredient_list.append(ingredientM)
     return metric_ingredient_list
 
