@@ -8,7 +8,7 @@ scraper = scrape_me('https://www.bonappetit.com/recipe/spicy-braised-eggplant-no
 title = scraper.title()
 scraper.total_time()
 scraper.yields()
-allIngredients = scraper.ingredients()
+all_ingredients = scraper.ingredients()
 scraper.instructions()
 scraper.image()
 scraper.host()
@@ -22,7 +22,6 @@ scraper.nutrients()  # if available
 #     lb. = gram
 #     ” = cm
 
-# key values
 unitMapping = {  
     "oz.": "gram",
     "cup": "ml",
@@ -30,15 +29,12 @@ unitMapping = {
     "”": " cm"
 }
 
-# nog niet gebruikt
-# key_list = list(unitMapping.keys())
-# val_list = list(unitMapping.values())
-
-# dict voor alle conversie-ratios
 conversionMapping = {
-    "gram": 28.34952  # oz naar gram
+    "oz.": 28.34952,  # oz naar gram
+    "cup": 235.6, # cups naar ml
+    "lb.": 453.59237, # lb. naar gram
+    "”": 2.54 # inch naar cm
 }
-
 
 conversionOldNew = {}
 
@@ -49,9 +45,9 @@ def getList(dict):
 oldNewList = getList(conversionOldNew)
 
 # haal van alle keys in de dict het volgende woord op en werk de dict bij
-i = 0
 # split zin op spatie
-for sentence in allIngredients:
+i = 0
+for sentence in all_ingredients:
     allWords = sentence.split(" ")
     print(sentence.split(" "))
     for word in allWords:
@@ -62,7 +58,9 @@ for sentence in allIngredients:
                     nextWord = allWords[i+1]
                     conversionOldNew[currWord] = nextWord
         i+=1
-    
+                
+print(conversionOldNew)
+
 # zet alle digits en fractions in conversionOldNew dict
 for word in allWords:
     if word.isdigit():
@@ -76,16 +74,13 @@ for word in allWords:
         conversionOldNew.update({0.5:0})
     elif word == "¾":
         conversionOldNew.update({0.75:0})
-        
-            
-print(conversionOldNew)
-              
-                
-# vervangt de amerikaanse unit/keys in allIngredients met value uit de mapping
 
-def imperial_metric(allIngredients):
+
+# vervangt de amerikaanse unit/keys in all_ingredients met value uit de mapping
+
+def imperial_metric(all_ingredients):
     ingredientsMetricList = []
-    for ingredient in allIngredients:
+    for ingredient in all_ingredients:
         ingredientM = ingredient
         
         for unit in unitMapping.keys():
@@ -94,7 +89,5 @@ def imperial_metric(allIngredients):
                 ingredientsMetricList.append(ingredientM)
     return ingredientsMetricList
 
-ingredientsMetric = imperial_metric(allIngredients)
+ingredientsMetric = imperial_metric(all_ingredients)
 print(ingredientsMetric)
-
-print(conversionOldNew)
