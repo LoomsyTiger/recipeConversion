@@ -79,7 +79,8 @@ for sentence in list_all_ingredients:
                     current_word = str(key)
                     next_word = list_all_ingredients[i+1]
                     dict_imperial_ingredients[current_word] = next_word
-    i+=1
+            i+=1   
+        i=0 
                 
 # print(dict_imperial_ingredients)
 
