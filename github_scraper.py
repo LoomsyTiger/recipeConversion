@@ -44,7 +44,8 @@ list_all_ingredients = []
 
 for sentence in all_ingredients:
     list_all_ingredients.append(sentence.split(" "))
-print(list_all_ingredients)
+
+# print(list_all_ingredients)
 
 # zet alle digits en fractions in conversionOldNew dict
 for ingredient in list_all_ingredients:
@@ -62,27 +63,28 @@ for ingredient in list_all_ingredients:
             dict_imperial_ingredients.update({0.75:0})
 
 # return een lijst van alle keys uit een dict
-def getList(dict):
+def get_list(dict):
     return list(dict.keys())
 
-list_imperial_ingredients = getList(dict_imperial_ingredients)
+list_imperial_ingredients = get_list(dict_imperial_ingredients)
 print(list_imperial_ingredients)
 
 # haal van alle keys in de dict het volgende woord op en werk de dict bij
 i = 0
-for word in list_all_ingredients:
-    for key in list_imperial_ingredients:
-        if key == word:
-            if (i+1 < len(list_all_ingredients) and i -1 >= 0):
-                currWord = str(key)
-                nextWord = list_all_ingredients[i+1]
-                dict_imperial_ingredients[currWord] = nextWord
+for sentence in list_all_ingredients:
+    for word in sentence:
+        for key in list_imperial_ingredients:
+            if key == word:
+                if (i+1 < len(list_all_ingredients) and i -1 >= 0):
+                    current_word = str(key)
+                    next_word = list_all_ingredients[i+1]
+                    dict_imperial_ingredients[current_word] = next_word
     i+=1
                 
-print(dict_imperial_ingredients)
+# print(dict_imperial_ingredients)
 
 
-# vervangt de amerikaanse unitnamen in all_ingredients met value uit de mapping
+# vertaalt de amerikaanse unitnamen in all_ingredients
 
 def imperial_metric(all_ingredients):
     metric_ingredient_list = []
@@ -95,4 +97,5 @@ def imperial_metric(all_ingredients):
                 metric_ingredient_list.append(ingredientM)
     return metric_ingredient_list
 
-ingredientsMetric = imperial_metric(all_ingredients)
+translated_ingredient_list = imperial_metric(all_ingredients)
+# print(translated_ingredient_list)
