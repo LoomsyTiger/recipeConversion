@@ -63,10 +63,10 @@ for ingredient in list_all_ingredients:
             dict_imperial_ingredients.update({0.75:0})
 
 # return een lijst van alle keys uit een dict
-def get_list(dict):
+def dict_to_list(dict):
     return list(dict.keys())
 
-list_imperial_ingredients = get_list(dict_imperial_ingredients)
+list_imperial_ingredients = dict_to_list(dict_imperial_ingredients)
 print(list_imperial_ingredients)
 
 # haal van alle keys in de dict het volgende woord op en werk de dict bij
@@ -74,15 +74,17 @@ i = 0
 for sentence in list_all_ingredients:
     for word in sentence:
         for key in list_imperial_ingredients:
-            if key == word:
-                if (i+1 < len(list_all_ingredients) and i -1 >= 0):
+            if str(key) == word:
+                if (i+1 < len(sentence) and i-1 >= 0):
                     current_word = str(key)
-                    next_word = list_all_ingredients[i+1]
+                    next_word = sentence[i+1]
                     dict_imperial_ingredients[current_word] = next_word
-            i+=1   
-        i=0 
+        i+=1
+    i = 0
                 
-# print(dict_imperial_ingredients)
+print(dict_imperial_ingredients)
+print(list_all_ingredients)
+
 
 
 # vertaalt de amerikaanse unitnamen in all_ingredients
@@ -90,13 +92,14 @@ for sentence in list_all_ingredients:
 def imperial_metric(all_ingredients):
     metric_ingredient_list = []
     for ingredient in all_ingredients:
-        ingredientM = ingredient
+        ingredient_metric = ingredient
         
         for unit in dict_unit_mapping.keys():
             if unit in ingredient:
-                ingredientM = ingredientM.replace(unit, dict_unit_mapping.get(unit))
-                metric_ingredient_list.append(ingredientM)
+                ingredient_metric = ingredient_metric.replace(unit, dict_unit_mapping.get(unit))
+                metric_ingredient_list.append(ingredient_metric)
     return metric_ingredient_list
 
+
 translated_ingredient_list = imperial_metric(all_ingredients)
-# print(translated_ingredient_list)
+print(translated_ingredient_list)
