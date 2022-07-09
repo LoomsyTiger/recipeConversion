@@ -75,8 +75,8 @@ for sentence in list_all_ingredients:
     for word in sentence:
         for key in list_imperial_ingredients:
             if str(key) == word:
-                if (i+1 < len(sentence) and i-1 >= 0):
-                    current_word = str(key)
+                if (i+1 < len(sentence)):
+                    current_word = key
                     next_word = sentence[i+1]
                     dict_imperial_ingredients[current_word] = next_word
         i+=1
