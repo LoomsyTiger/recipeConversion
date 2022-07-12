@@ -103,3 +103,11 @@ def imperial_metric(all_ingredients):
 
 translated_ingredient_list = imperial_metric(all_ingredients)
 print(translated_ingredient_list)
+
+for key in list_imperial_ingredients:
+    if key in dict_imperial_ingredients:
+        imperial_value = dict_imperial_ingredients[key]
+        if imperial_value in dict_conversion_rates:
+            rate = dict_conversion_rates[imperial_value]
+            converted_amount = key * rate
+            print(converted_amount)
