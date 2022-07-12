@@ -1,8 +1,4 @@
-from enum import EnumMeta
-import enum
-from operator import index
 from recipe_scrapers import scrape_me
-from itertools import cycle
 
 scraper = scrape_me('https://www.bonappetit.com/recipe/spicy-braised-eggplant-noodles')
 title = scraper.title()
@@ -37,7 +33,7 @@ dict_conversion_rates = {
 }
 
 dict_imperial_ingredients = {} # dictionary met de integer-waarden van ieder ingrediënt als KEY + de string van de eenheid als VALUE
-list_imperial_ingredients = [] # list voor alle KEYS uit de dict
+list_imperial_amounts = [] # list voor alle KEYS uit de dict
 list_all_ingredients = []
 
 # split zin op spatie
@@ -66,14 +62,15 @@ for ingredient in list_all_ingredients:
 def dict_to_list(dict):
     return list(dict.keys())
 
-list_imperial_ingredients = dict_to_list(dict_imperial_ingredients)
-print(list_imperial_ingredients)
+list_imperial_amounts = dict_to_list(dict_imperial_ingredients)
+print("list_imperial_ingrediets:")
+print(list_imperial_amounts)
 
 # haal van alle keys in de dict het volgende woord op en werk de dict bij
 i = 0
 for sentence in list_all_ingredients:
     for word in sentence:
-        for key in list_imperial_ingredients:
+        for key in list_imperial_amounts:
             if str(key) == word:
                 if (i+1 < len(sentence)):
                     current_word = key
@@ -81,8 +78,10 @@ for sentence in list_all_ingredients:
                     dict_imperial_ingredients[current_word] = next_word
         i+=1
     i = 0
-                
+
+print("dict_imperial_ingredients: ")                
 print(dict_imperial_ingredients)
+print("list_all_ingredients: ")    
 print(list_all_ingredients)
 
 
@@ -100,14 +99,32 @@ def imperial_metric(all_ingredients):
                 metric_ingredient_list.append(ingredient_metric)
     return metric_ingredient_list
 
-
 translated_ingredient_list = imperial_metric(all_ingredients)
+
+print("translated_ingredient_list: ")   
 print(translated_ingredient_list)
 
-for key in list_imperial_ingredients:
-    if key in dict_imperial_ingredients:
-        imperial_value = dict_imperial_ingredients[key]
-        if imperial_value in dict_conversion_rates:
-            rate = dict_conversion_rates[imperial_value]
-            converted_amount = key * rate
-            print(converted_amount)
+# poging 1 omrekenen van hoeveelheden
+# for number in list_imperial_amounts:
+#     imperial_value = dict_imperial_ingredients[key]
+    
+#     for imperial_value in 
+    
+#     if key in dict_imperial_ingredients:
+#         if imperial_value in dict_conversion_rates:
+#             rate = dict_conversion_rates[imperial_value]
+#             converted_amount = key * rate
+#             print(converted_amount)
+            
+# poging 2 omrekenen van hoeveelheden
+
+list_metric_amounts = []
+        
+for key in dict_imperial_ingredients:
+    unit = dict_imperial_ingredients[key]
+    if unit in dict_conversion_rates:
+        conversion_rate = dict_conversion_rates[unit]
+        metric_amount = key * conversion_rate
+        list_metric_amounts.append(metric_amount)
+    
+print(list_metric_amounts)
