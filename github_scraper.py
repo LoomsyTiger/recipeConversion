@@ -19,7 +19,7 @@ scraper.nutrients()  # if available
 #     ” = cm
 
 dict_unit_mapping = {  
-    "oz.": "gram",
+    "oz.": "grams",
     "cup": "ml",
     "lb.": "gram",
     "”": " cm"
@@ -75,13 +75,17 @@ for sentence in list_all_ingredients:
                 if (i+1 < len(sentence)):
                     current_word = key
                     next_word = sentence[i+1]
+                    rest = sentence[i+2]
                     dict_imperial_ingredients[current_word] = next_word
         i+=1
     i = 0
+    
+# Todo: er gaat iets mis in deze FOR loop, waardoor o.a. de CUPS niet worden meegenomen
 
-print("dict_imperial_ingredients: ")                
+
+print("dict_imperial_ingredients:")                
 print(dict_imperial_ingredients)
-print("list_all_ingredients: ")    
+print("list_all_ingredients:")    
 print(list_all_ingredients)
 
 
@@ -118,6 +122,7 @@ print(translated_ingredient_list)
             
 # poging 2 omrekenen van hoeveelheden
 
+
 list_metric_amounts = []
         
 for key in dict_imperial_ingredients:
@@ -125,6 +130,10 @@ for key in dict_imperial_ingredients:
     if unit in dict_conversion_rates:
         conversion_rate = dict_conversion_rates[unit]
         metric_amount = key * conversion_rate
-        list_metric_amounts.append(metric_amount)
-    
+        metric_unit = dict_unit_mapping[unit]
+        list_metric_amounts.append(str(round(metric_amount)) + " " + metric_unit + " ") 
+
+
+# Todo: de laatste regel van deze FOR loop mist alleen nog het ingredient in kwestie.
+     
 print(list_metric_amounts)
