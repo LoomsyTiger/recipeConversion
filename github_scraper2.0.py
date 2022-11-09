@@ -22,6 +22,9 @@ test_dict = {
     1: "lb."
 }
 
+
+# haalt alle waarden uit de dict en vertaalt ze naar metrisch
+
 test_dict_converted = {}
 
 for key in test_dict:
@@ -29,9 +32,6 @@ for key in test_dict:
     rounded = round(rate)
     metric_unit = dict_unit_mapping.get(test_dict.get(key))
     test_dict_converted.update({rounded:metric_unit})
-
-print("ronde 1 testdict")
-print(test_dict)
 
 print("converted dict")
 print(test_dict_converted)
