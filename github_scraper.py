@@ -63,7 +63,7 @@ def dict_to_list(dict):
     return list(dict.keys())
 
 list_imperial_amounts = dict_to_list(dict_imperial_ingredients)
-print("list_imperial_ingrediets:")
+print("list_imperial_amounts:")
 print(list_imperial_amounts)
 
 # haal van alle keys in de dict het volgende woord op en werk de dict bij
@@ -87,8 +87,6 @@ print("dict_imperial_ingredients:")
 print(dict_imperial_ingredients)
 print("list_all_ingredients:")    
 print(list_all_ingredients)
-
-
 
 # vertaalt de amerikaanse unitnamen in all_ingredients
 
